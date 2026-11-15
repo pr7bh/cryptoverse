@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Homepage from './Pages/HomePage';
 import CoinPage from './Pages/CoinPage';
 import { useLenis } from './hooks/useLenis';
@@ -14,6 +15,7 @@ function App() {
         <Header />
         <Route path="/" component={Homepage} exact />
         <Route path="/coins/:id" component={CoinPage} exact />
+        <Footer />
       </div>
     </BrowserRouter>
   );
