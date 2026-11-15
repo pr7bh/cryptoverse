@@ -1,0 +1,46 @@
+.sc-page { padding-top: 80px; min-height: 100vh; }
+.sc-header { background: var(--bg-surface); border-bottom: 1px solid var(--border); }
+.sc-header__inner { max-width: 1280px; margin: 0 auto; padding: 24px 24px 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.sc-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.sc-title { font-size: 28px; font-weight: 800; color: var(--text-1); letter-spacing: -0.5px; }
+.sc-controls { display: flex; gap: 10px; }
+.sc-search { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-1); font-family: var(--font); font-size: 13px; padding: 8px 14px; outline: none; width: 220px; transition: border-color 0.2s; }
+.sc-search:focus { border-color: var(--accent-border); }
+.sc-search::placeholder { color: var(--text-3); }
+.sc-filters { max-width: 1280px; margin: 0 auto; padding: 16px 24px; display: flex; gap: 24px; flex-wrap: wrap; }
+.sc-filter-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sc-filter-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+.sc-filter-btn { background: none; border: 1px solid var(--border); color: var(--text-2); font-family: var(--font); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 100px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.sc-filter-btn:hover { background: var(--border-subtle); color: var(--text-1); }
+.sc-filter-btn.active { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); font-weight: 600; }
+.sc-count { max-width: 1280px; margin: 0 auto; padding: 8px 24px 12px; font-size: 12px; color: var(--text-3); }
+.sc-body { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; }
+.sc-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.sc-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+.sc-th { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.8px; padding: 14px 16px; background: var(--bg); border-bottom: 1px solid var(--border); cursor: pointer; white-space: nowrap; user-select: none; }
+.sc-th:hover { color: var(--text-1); }
+.sc-th--left { text-align: left; }
+.sc-th--right { text-align: right; }
+.sc-th-inner { display: inline-flex; align-items: center; gap: 5px; }
+.sc-sort-icon { font-size: 10px; opacity: 0.5; }
+.sc-row { border-bottom: 1px solid var(--border-subtle); cursor: pointer; transition: background 0.12s; }
+.sc-row:hover { background: rgba(185,243,107,0.03); }
+.sc-row:last-child { border-bottom: none; }
+.sc-td { padding: 14px 16px; font-size: 13px; color: var(--text-1); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sc-td--left { text-align: left; }
+.sc-td--right { text-align: right; }
+.sc-rank { font-size: 12px; color: var(--text-3); font-weight: 500; }
+.sc-asset { display: flex; align-items: center; gap: 10px; }
+.sc-img { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-elevated); }
+.sc-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.sc-sym { font-size: 11px; color: var(--text-3); }
+.sc-pos { color: var(--positive); font-weight: 500; }
+.sc-neg { color: var(--negative); font-weight: 500; }
+.sc-muted { color: var(--text-3); }
+.sc-supply-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.sc-supply-bar { width: 60px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.sc-supply-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+.sc-loading { padding: 16px 0; display: flex; flex-direction: column; gap: 2px; }
+.sc-skeleton-row { height: 48px; background: var(--bg-elevated); border-radius: 4px; animation: sc-shimmer 1.4s ease-in-out infinite; }
+@keyframes sc-shimmer { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
+@media (max-width: 768px) { .sc-body, .sc-filters, .sc-count, .sc-header__inner { padding-left: 16px; padding-right: 16px; } .sc-search { width: 160px; } }
