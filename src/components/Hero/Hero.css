@@ -1,0 +1,167 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 65% 50%, rgba(185,243,107,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 70% at 80% 50%, rgba(155,140,255,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 80% at 20% 80%, rgba(7,9,13,0.9) 0%, rgba(7,9,13,0.3) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  opacity: 0;
+}
+.hero-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: blink 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.hero-title {
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -3px;
+  color: var(--text-1);
+  margin-bottom: 28px;
+  opacity: 0;
+}
+.hero-title-accent {
+  background: linear-gradient(135deg, #B9F36B 0%, #9B8CFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text-2);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 44px;
+  opacity: 0;
+}
+.hero-br { display: block; }
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+}
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #07090D;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.25s var(--spring), box-shadow 0.25s ease;
+}
+.hero-btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(185,243,107,0.35);
+}
+.hero-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-2);
+  padding: 15px 24px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.hero-btn-ghost:hover {
+  color: var(--text-1);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-3);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--text-3), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100%{ opacity:0.3; transform:scaleY(1); }
+  50%{ opacity:1; transform:scaleY(1.2); }
+}
+
+@media (max-width: 768px) {
+  .hero-content { padding: 0 20px; }
+  .hero-title { letter-spacing: -2px; }
+  .hero-sub br { display: none; }
+  .hero-scroll-hint { display: none; }
+}
+
+/* Light theme overrides */
+[data-theme="light"] .hero-overlay {
+  background:
+    radial-gradient(ellipse 60% 60% at 65% 50%, rgba(107,168,37,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 70% at 80% 50%, rgba(118,100,217,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 80% at 20% 80%, rgba(245,247,250,0.85) 0%, rgba(245,247,250,0.2) 100%);
+}
+[data-theme="light"] .hero-title { color: var(--text-1); }
+[data-theme="light"] .hero-sub { color: var(--text-2); }
+[data-theme="light"] .hero-btn-ghost { border-color: var(--border); color: var(--text-2); }
+[data-theme="light"] .hero-btn-ghost:hover { color: var(--text-1); }
+[data-theme="light"] .hero-scroll-hint { color: var(--text-3); }

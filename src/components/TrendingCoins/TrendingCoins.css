@@ -1,0 +1,154 @@
+.tc-section { padding: 0 24px 80px; }
+.tc-inner { max-width: 1280px; margin: 0 auto; }
+.tc-header { margin-bottom: 32px; }
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.section-heading {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: var(--text-1);
+}
+
+/* Spotlight card */
+.tc-card {
+  --mx: 50%;
+  --my: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 4px 6px;
+  opacity: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    border-color 0.25s,
+    transform 0.25s var(--spring),
+    box-shadow 0.25s;
+}
+/* Radial spotlight follows mouse */
+.tc-card__spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 120px at var(--mx) var(--my),
+    rgba(185, 243, 107, 0.10),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 0;
+}
+.tc-card:hover .tc-card__spotlight { opacity: 1; }
+.tc-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--accent-border);
+}
+
+/* All children above spotlight */
+.tc-card > *:not(.tc-card__spotlight) { position: relative; z-index: 1; }
+
+.tc-rank {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+}
+.tc-img-wrap {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  display: flex; align-items: center; justify-content: center;
+  padding: 6px;
+  margin-bottom: 4px;
+}
+.tc-img { width: 44px; height: 44px; border-radius: 50%; object-fit: contain; }
+.tc-symbol { font-size: 15px; font-weight: 700; color: var(--text-1); }
+.tc-name { font-size: 11px; color: var(--text-2); }
+.tc-price { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text-1); }
+.tc-change { font-size: 13px; font-weight: 600; }
+.tc-change.up { color: var(--positive); }
+.tc-change.down { color: var(--negative); }
+
+/* Skeletons */
+.tc-skeleton-row { display: flex; gap: 10px; }
+.tc-skeleton {
+  flex: 1; height: 196px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-elevated) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: tc-shimmer 1.5s infinite;
+}
+@keyframes tc-shimmer { to { background-position: -200% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-card { opacity: 1; }
+  .tc-card:hover { transform: none; }
+  .tc-card__spotlight { display: none; }
+}
+
+/* Light theme overrides */
+[data-theme="light"] .tc-card { background: var(--bg-surface); border-color: var(--border); box-shadow: var(--shadow-sm); }
+[data-theme="light"] .tc-card:hover { box-shadow: var(--shadow); }
+[data-theme="light"] .tc-card__spotlight { background: radial-gradient(circle 120px at var(--mx) var(--my), rgba(107,168,37,0.08), transparent 70%); }
+[data-theme="light"] .tc-img-wrap { background: var(--bg-elevated); }
+
+/* Card depth and hierarchy */
+.tc-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+}
+.tc-card:hover {
+  box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--accent-border), 0 0 20px rgba(185,243,107,0.06);
+}
+[data-theme="light"] .tc-card:hover {
+  box-shadow: var(--shadow), 0 0 0 1px var(--accent-border);
+}
+/* Rank badge */
+.tc-rank {
+  background: var(--bg-elevated);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+/* Change pill */
+.tc-change {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+.tc-change.up {
+  background: rgba(0,214,163,0.1);
+  border: 1px solid rgba(0,214,163,0.18);
+}
+.tc-change.down {
+  background: rgba(255,85,112,0.1);
+  border: 1px solid rgba(255,85,112,0.18);
+}
+[data-theme="light"] .tc-change.up {
+  background: rgba(5,150,105,0.08);
+  border-color: rgba(5,150,105,0.2);
+  color: var(--positive);
+}
+[data-theme="light"] .tc-change.down {
+  background: rgba(229,72,93,0.08);
+  border-color: rgba(229,72,93,0.2);
+  color: var(--negative);
+}

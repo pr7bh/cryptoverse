@@ -1,0 +1,88 @@
+/* ── Default (dark) — fallback before script runs ── */
+:root {
+  --bg: #07090D;
+  --bg-surface: #0D1118;
+  --bg-elevated: #141B25;
+  --bg-card: rgba(20,27,37,0.8);
+  --text-1: #F5F7FA;
+  --text-2: #8993A4;
+  --text-3: #4A5568;
+  --border: rgba(255,255,255,0.08);
+  --border-subtle: rgba(255,255,255,0.04);
+  --accent: #B9F36B;
+  --accent-dim: rgba(185,243,107,0.12);
+  --accent-border: rgba(185,243,107,0.25);
+  --violet: #9B8CFF;
+  --violet-dim: rgba(155,140,255,0.12);
+  --positive: #00D6A3;
+  --negative: #FF5570;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --shadow: 0 8px 48px rgba(0,0,0,0.5);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+  --font: 'Inter', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+  --spring: cubic-bezier(0.34,1.56,0.64,1);
+  --chart-grid: rgba(255,255,255,0.04);
+  --chart-axis: #8993A4;
+  --chart-tooltip-bg: rgba(13,17,24,0.97);
+  --chart-tooltip-text: #F5F7FA;
+}
+
+[data-theme="dark"] {
+  --bg: #07090D;
+  --bg-surface: #0D1118;
+  --bg-elevated: #141B25;
+  --bg-card: rgba(20,27,37,0.8);
+  --text-1: #F5F7FA;
+  --text-2: #8993A4;
+  --text-3: #4A5568;
+  --border: rgba(255,255,255,0.08);
+  --border-subtle: rgba(255,255,255,0.04);
+  --accent: #B9F36B;
+  --accent-dim: rgba(185,243,107,0.12);
+  --accent-border: rgba(185,243,107,0.25);
+  --violet: #9B8CFF;
+  --violet-dim: rgba(155,140,255,0.12);
+  --positive: #00D6A3;
+  --negative: #FF5570;
+  --shadow: 0 8px 48px rgba(0,0,0,0.5);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+  --chart-grid: rgba(255,255,255,0.04);
+  --chart-axis: #8993A4;
+  --chart-tooltip-bg: rgba(13,17,24,0.97);
+  --chart-tooltip-text: #F5F7FA;
+}
+
+[data-theme="light"] {
+  --bg: #F5F7FA;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F0F2F5;
+  --bg-card: rgba(255,255,255,0.9);
+  --text-1: #111827;
+  --text-2: #64748B;
+  --text-3: #94A3B8;
+  --border: #E5E7EB;
+  --border-subtle: #F1F3F5;
+  --accent: #6BA825;
+  --accent-dim: rgba(107,168,37,0.1);
+  --accent-border: rgba(107,168,37,0.3);
+  --violet: #7664D9;
+  --violet-dim: rgba(118,100,217,0.1);
+  --positive: #059669;
+  --negative: #E5485D;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --chart-grid: rgba(0,0,0,0.05);
+  --chart-axis: #94A3B8;
+  --chart-tooltip-bg: rgba(255,255,255,0.98);
+  --chart-tooltip-text: #111827;
+}
+
+/* Typography scale */
+.type-display { font-size: clamp(48px,7vw,88px); font-weight: 800; letter-spacing: -3px; line-height: 1.0; }
+.type-h1 { font-size: clamp(32px,4vw,52px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; }
+.type-h2 { font-size: clamp(24px,3vw,36px); font-weight: 700; letter-spacing: -0.8px; }
+.type-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.type-mono { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }

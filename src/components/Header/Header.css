@@ -1,0 +1,160 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  opacity: 0;
+  background: rgba(7, 9, 13, 0);
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+  padding: 0 24px;
+  border-bottom: 1px solid transparent;
+}
+.header--scrolled {
+  background: rgba(7, 9, 13, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom-color: rgba(255,255,255,0.05);
+}
+.header__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.header__logo-mark {
+  font-size: 20px;
+  color: var(--accent);
+  line-height: 1;
+}
+.header__logo-text {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-1);
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.header__nav-link {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: 100px;
+  transition: color 0.2s, background 0.2s;
+}
+.header__nav-link:hover, .header__nav-link.active {
+  color: var(--text-1);
+  background: rgba(255,255,255,0.05);
+}
+.header__currency {
+  display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 2px;
+  margin-left: 12px;
+}
+.header__currency-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.header__currency-btn.active {
+  background: var(--accent);
+  color: #07090D;
+}
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.header__hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-1);
+  border-radius: 2px;
+  transition: transform 0.25s var(--ease), opacity 0.25s;
+}
+.header__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.header__hamburger.open span:nth-child(2) { opacity: 0; }
+.header__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .header__hamburger { display: flex; }
+  .header__nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0; right: 0;
+    background: rgba(13,17,24,0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    display: none;
+  }
+  .header__nav--open { display: flex; }
+  .header__currency { margin-left: 0; }
+}
+
+/* Theme toggle button */
+.header__theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  margin-left: 6px;
+}
+.header__theme-btn:hover { border-color: rgba(255,255,255,0.15); color: var(--text-1); }
+.header__theme-icon { font-size: 14px; line-height: 1; }
+.header__theme-label { font-size: 11px; letter-spacing: 0.3px; }
+
+/* Light theme overrides */
+[data-theme="light"] .header--scrolled {
+  background: rgba(245,247,250,0.9);
+  border-bottom-color: var(--border);
+}
+[data-theme="light"] .header__logo-text { color: var(--text-1); }
+[data-theme="light"] .header__nav-link { color: var(--text-2); }
+[data-theme="light"] .header__nav-link:hover, [data-theme="light"] .header__nav-link.active {
+  color: var(--text-1); background: rgba(0,0,0,0.04);
+}
+[data-theme="light"] .header__currency { background: rgba(0,0,0,0.04); }
+[data-theme="light"] .header__currency-btn.active { background: var(--accent); color: #fff; }
+[data-theme="light"] .header__hamburger span { background: var(--text-1); }
+[data-theme="light"] .header__theme-btn { background: rgba(0,0,0,0.03); }

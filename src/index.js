@@ -1,15 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import "react-alice-carousel/lib/alice-carousel.css";
-import CryptoContext from "./CryptoContext";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import CryptoContext from './CryptoContext';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <CryptoContext>
-      <App />
-    </CryptoContext>
+    <ThemeProvider>
+      <CryptoContext>
+        <App />
+      </CryptoContext>
+    </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
