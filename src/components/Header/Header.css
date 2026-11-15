@@ -158,3 +158,12 @@
 [data-theme="light"] .header__currency-btn.active { background: var(--accent); color: #fff; }
 [data-theme="light"] .header__hamburger span { background: var(--text-1); }
 [data-theme="light"] .header__theme-btn { background: rgba(0,0,0,0.03); }
+
+/* Additional nav links */
+.header__nav-link--small {
+  font-size: 13px;
+  padding: 7px 12px;
+}
+@media (max-width: 1024px) {
+  .header__nav-link--small { font-size: 12px; padding: 6px 10px; }
+}

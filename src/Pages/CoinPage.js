@@ -7,6 +7,7 @@ import { SingleCoin } from '../config/api';
 import { numberWithCommas } from '../utils/format';
 import { CryptoState } from '../CryptoContext';
 import { toggleWatchlist, isWatchlisted } from '../utils/watchlist';
+import { addRecentlyViewed } from '../hooks/useRecentlyViewed';
 import gsap from 'gsap';
 import './CoinPage.css';
 
@@ -34,6 +35,7 @@ const CoinPage = () => {
 
   useEffect(() => {
     if (!loading && coin && pageRef.current) {
+      addRecentlyViewed(coin);
       gsap.fromTo('.cp-reveal', { opacity: 0, y: 20 },
         { opacity: 1, y: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out' });
     }

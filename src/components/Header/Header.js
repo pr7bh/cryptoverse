@@ -51,7 +51,11 @@ const Header = () => {
 
         <nav className={`header__nav ${menuOpen ? 'header__nav--open' : ''}`}>
           <a href="/" className={`header__nav-link ${isHome ? 'active' : ''}`}>Markets</a>
-          <a href="#trending" className="header__nav-link">Trending</a>
+          <a href="/heatmap" className={`header__nav-link header__nav-link--small ${location.pathname === '/heatmap' ? 'active' : ''}`} onClick={e => { e.preventDefault(); history.push('/heatmap'); }}>Heatmap</a>
+          <a href="/compare" className={`header__nav-link header__nav-link--small ${location.pathname === '/compare' ? 'active' : ''}`} onClick={e => { e.preventDefault(); history.push('/compare'); }}>Compare</a>
+          <a href="/screener" className={`header__nav-link header__nav-link--small ${location.pathname === '/screener' ? 'active' : ''}`} onClick={e => { e.preventDefault(); history.push('/screener'); }}>Screener</a>
+          <a href="/converter" className={`header__nav-link header__nav-link--small ${location.pathname === '/converter' ? 'active' : ''}`} onClick={e => { e.preventDefault(); history.push('/converter'); }}>Converter</a>
+          <a href="/portfolio" className={`header__nav-link header__nav-link--small ${location.pathname === '/portfolio' ? 'active' : ''}`} onClick={e => { e.preventDefault(); history.push('/portfolio'); }}>Portfolio</a>
           <div className="header__currency">
             {['USD', 'INR'].map(c => (
               <button

@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import CryptoContext from './CryptoContext';
 import { ThemeProvider } from './theme/ThemeProvider';
+import { PortfolioProvider } from './features/portfolio/PortfolioContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
       <CryptoContext>
-        <App />
+        <PortfolioProvider>
+          <App />
+        </PortfolioProvider>
       </CryptoContext>
     </ThemeProvider>
   </React.StrictMode>,
