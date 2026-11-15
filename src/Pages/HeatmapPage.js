@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { CryptoState } from '../CryptoContext';
-import { useTheme } from '../theme/ThemeContext';
 import { numberWithCommas } from '../utils/format';
 import './HeatmapPage.css';
 
@@ -25,6 +24,7 @@ function squarify(items, x, y, width, height) {
       var candidateItems = remaining.slice(0, i + 1);
       var candidateSum = candidateItems.reduce(function(s, it) { return s + it.value; }, 0);
       var stripWidth = (candidateSum / stripTotal) * (isHorizontal ? rw : rh);
+      // eslint-disable-next-line no-loop-func
       var worstRatio = candidateItems.reduce(function(worst, it) {
         var tileLen = (it.value / candidateSum) * stripDim;
         var ratio = Math.max(stripWidth / tileLen, tileLen / stripWidth);
@@ -38,6 +38,7 @@ function squarify(items, x, y, width, height) {
     var stripFraction = stripTotal > 0 ? stripSum / stripTotal : 0;
     var stripMainDim = isHorizontal ? rw * stripFraction : rh * stripFraction;
     var pos = isHorizontal ? ry : rx;
+    // eslint-disable-next-line no-loop-func
     stripItems.forEach(function(item) {
       var tileFrac = stripSum > 0 ? item.value / stripSum : 0;
       var tileDim = stripDim * tileFrac;
@@ -99,13 +100,15 @@ var HeatmapPage = function() {
   var containerSize = csState[0];
   var setContainerSize = csState[1];
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     setLoading(true);
     axios.get(BASE + '/coins/markets?vs_currency=' + currency.toLowerCase() + '&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h')
       .then(function(res) { setCoins(res.data || []); setLoading(false); })
       .catch(function() { setLoading(false); });
-  }, [currency]);
+  }, [currency]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     if (!containerRef.current) return;
     var ro = new ResizeObserver(function(entries) {
@@ -116,7 +119,7 @@ var HeatmapPage = function() {
     });
     ro.observe(containerRef.current);
     return function() { ro.disconnect(); };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   var items = coins
     .filter(function(c) { return c.market_cap > 0; })

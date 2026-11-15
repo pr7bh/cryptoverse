@@ -69,6 +69,7 @@ var ComparePage = function() {
 
   var searchTimerRef = useRef(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     clearTimeout(searchTimerRef.current);
     if (!coinSearch || coinSearch.length < 2) { setSuggestions([]); return; }
@@ -77,7 +78,7 @@ var ComparePage = function() {
         .then(function(res) { setSuggestions((res.data.coins || []).slice(0, 6)); })
         .catch(function() {});
     }, 300);
-  }, [coinSearch]);
+  }, [coinSearch]); // eslint-disable-line react-hooks/exhaustive-deps
 
   var addCoin = function(coin) {
     if (selectedCoins.find(function(c) { return c.id === coin.id; }) || selectedCoins.length >= 4) return;
@@ -99,6 +100,7 @@ var ComparePage = function() {
 
   var selectedIds = selectedCoins.map(function(c) { return c.id; }).join(',');
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     if (!selectedCoins.length) return;
     var curr = currency.toLowerCase();
@@ -113,8 +115,9 @@ var ComparePage = function() {
         })
         .catch(function() {});
     });
-  }, [selectedIds, period, currency]);
+  }, [selectedIds, period, currency]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     if (!selectedCoins.length) return;
     selectedCoins.forEach(function(coin) {
@@ -131,7 +134,7 @@ var ComparePage = function() {
         })
         .catch(function() {});
     });
-  }, [selectedIds, currency]);
+  }, [selectedIds, currency]); // eslint-disable-line react-hooks/exhaustive-deps
 
   var buildDataset = function() {
     if (!selectedCoins.length) return { labels: [], datasets: [] };

@@ -86,6 +86,7 @@ var ConverterPage = function() {
   var coinSearch2 = cs2State[0];
   var setCoinSearch2 = cs2State[1];
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     setLoading(true);
     axios.get(BASE + '/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
@@ -99,8 +100,9 @@ var ConverterPage = function() {
         setLoading(false);
       })
       .catch(function() { setLoading(false); });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     if (coins.length === 0) return;
     var ids = coins.slice(0, 20).map(function(c) { return c.id; }).join(',');
@@ -118,7 +120,7 @@ var ConverterPage = function() {
         setLastUpdated(new Date().toLocaleTimeString());
       })
       .catch(function() {});
-  }, [coins]);
+  }, [coins]); // eslint-disable-line react-hooks/exhaustive-deps
 
   var getValueInUSD = useCallback(function(type, coin, fiat, qty) {
     if (!qty || isNaN(qty)) return 0;

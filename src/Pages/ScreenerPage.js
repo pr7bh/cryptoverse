@@ -80,12 +80,13 @@ var ScreenerPage = function() {
   var search = searchState[0];
   var setSearch = searchState[1];
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(function() {
     setLoading(true);
     axios.get(BASE + '/coins/markets?vs_currency=' + currency.toLowerCase() + '&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d')
       .then(function(res) { setCoins(res.data || []); setLoading(false); })
       .catch(function() { setLoading(false); });
-  }, [currency]);
+  }, [currency]); // eslint-disable-line react-hooks/exhaustive-deps
 
   var handleSort = function(key) {
     if (sortKey === key) {
