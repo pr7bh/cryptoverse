@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { useHistory, useLocation } from 'react-router-dom';
 import { CryptoState } from '../../CryptoContext';
 import { useTheme } from '../../theme/ThemeContext';
@@ -100,6 +101,7 @@ const Header = () => {
     path === '/' ? location.pathname === '/' : location.pathname === path;
 
   return (
+    <React.Fragment>
     <header ref={headerRef} className={`header ${scrolled ? 'header--scrolled' : ''}`}>
       <div className="header__inner">
         <div className="header__logo" onClick={() => navigate('/')}>
@@ -140,7 +142,8 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Full-screen mobile menu */}
+    </header>
+    {ReactDOM.createPortal(
       <div ref={navRef} className={`header__menu ${menuOpen ? 'header__menu--open' : ''}`} aria-hidden={!menuOpen}>
         <nav className="header__menu-nav">
           {NAV_LINKS.map((l, i) => (
@@ -168,8 +171,10 @@ const Header = () => {
           </button>
           <span className="header__menu-hint">Press ESC to close</span>
         </div>
-      </div>
-    </header>
+      </div>,
+      document.body
+    )}
+    </React.Fragment>
   );
 };
 
