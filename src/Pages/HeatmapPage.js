@@ -100,15 +100,15 @@ var HeatmapPage = function() {
   var containerSize = csState[0];
   var setContainerSize = csState[1];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(function() {
-    setLoading(true);
-    axios.get(BASE + '/coins/markets?vs_currency=' + currency.toLowerCase() + '&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h')
-      .then(function(res) { setCoins(res.data || []); setLoading(false); })
-      .catch(function() { setLoading(false); });
-  }, [currency]); // eslint-disable-line react-hooks/exhaustive-deps
+  var errState = useState(false);
+  var hasError = errState[0];
+  var setHasError = errState[1];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  var retryState = useState(0);
+  var retryCount = retryState[0];
+  var setRetryCount = retryState[1];
+
+  // ResizeObserver: runs once — container is always in DOM so ref is available
   useEffect(function() {
     if (!containerRef.current) return;
     var ro = new ResizeObserver(function(entries) {
@@ -120,6 +120,14 @@ var HeatmapPage = function() {
     ro.observe(containerRef.current);
     return function() { ro.disconnect(); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(function() {
+    setLoading(true);
+    setHasError(false);
+    axios.get(BASE + '/coins/markets?vs_currency=' + currency.toLowerCase() + '&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h')
+      .then(function(res) { setCoins(res.data || []); setLoading(false); })
+      .catch(function() { setLoading(false); setHasError(true); });
+  }, [currency, retryCount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   var items = coins
     .filter(function(c) { return c.market_cap > 0; })
@@ -164,15 +172,25 @@ var HeatmapPage = function() {
       </div>
 
       <div className="hm-wrap">
-        {loading ? (
-          <div className="hm-skeleton">
-            {Array.from({ length: 20 }).map(function(_, i) {
-              return <div key={i} className="hm-skeleton-tile" style={{ animationDelay: (i * 0.05) + 's' }} />;
-            })}
-          </div>
-        ) : (
-          <div className="hm-container" ref={containerRef}>
-            {tiles.map(function(tile) {
+        <div className="hm-container" ref={containerRef}>
+          {loading && (
+            <div className="hm-overlay">
+              <div className="hm-skeleton-grid">
+                {Array.from({ length: 20 }).map(function(_, i) {
+                  return <div key={i} className="hm-skeleton-tile" style={{ animationDelay: (i * 0.05) + 's' }} />;
+                })}
+              </div>
+            </div>
+          )}
+          {hasError && !loading && (
+            <div className="hm-error-state">
+              <div className="hm-error-icon">⚠</div>
+              <div className="hm-error-title">Rate Limited</div>
+              <p className="hm-error-msg">CoinGecko rate limit reached. Please wait a moment.</p>
+              <button className="hm-retry-btn" onClick={function() { setRetryCount(function(n) { return n + 1; }); }}>Retry</button>
+            </div>
+          )}
+          {!loading && !hasError && tiles.map(function(tile) {
               var r = tile.rect;
               var tooSmall = r.w < 50 || r.h < 40;
               var verySmall = r.w < 70 || r.h < 55;
@@ -205,9 +223,8 @@ var HeatmapPage = function() {
                   )}
                 </div>
               );
-            })}
-          </div>
-        )}
+          })}
+        </div>
       </div>
 
       {tooltip && (
